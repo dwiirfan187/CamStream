@@ -248,3 +248,60 @@ body {
 .cc-logo span.accent {
   color: #E63946;
 }
+
+/* ============================================
+   LIVE (GREEN) CARD VARIANT  — DESIGN.md §4
+   Active streaming card: border & shadow follow live color
+   ============================================ */
+
+.cc-card-live {
+  background-color: #FFFFFF;
+  border: 2px solid rgba(57, 255, 20, 0.7);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 6px 6px 0px rgba(57, 255, 20, 0.7);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.cc-card-live:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 4px 4px 0px rgba(57, 255, 20, 0.7);
+}
+
+/* ============================================
+   EMPTY SLOT CARD — dashed border, muted bg
+   ============================================ */
+
+.cc-card-empty {
+  background-color: #E9ECEF;
+  border: 2px dashed #1A1D20;
+  border-radius: 12px;
+  padding: 24px;
+  /* no solid shadow on empty — it's inactive */
+  transition: background-color 0.12s ease, border-color 0.12s ease;
+}
+
+.cc-card-empty:hover {
+  background-color: #dee2e6;
+  border-color: #E63946;
+}
+
+/* ============================================
+   DISCONNECT BADGE
+   ============================================ */
+
+.cc-badge-disconnect {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(26, 29, 32, 0.08);
+  border: 2px solid #1A1D20;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1A1D20;
+  box-shadow: 2px 2px 0px #1A1D20;
+}

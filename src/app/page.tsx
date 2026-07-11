@@ -194,7 +194,7 @@ export default function LandingPage() {
       >
         {/* Receiver Card */}
         <ModeCard
-          href="/receiver"
+          href="/dashboard"
           icon={<IconMonitor />}
           tag="01 — RECEIVER"
           label="Mode Receiver"
