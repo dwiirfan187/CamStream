@@ -1,0 +1,250 @@
+@import "tailwindcss";
+
+/* ============================================
+   CAMCAST DESIGN SYSTEM - DESIGN.md Tokens
+   ============================================ */
+
+@theme inline {
+  /* Color Palette */
+  --color-canvas:       #F8F9FA;  /* Primary Canvas / Dashboard bg */
+  --color-ink:          #1A1D20;  /* Deep Text & Borders */
+  --color-muted:        #E9ECEF;  /* Empty card bodies, inner containers */
+  --color-accent:       #E63946;  /* Accent Action Red - CTA, active selections */
+  --color-live:         rgba(57, 255, 20, 0.7); /* Live Status Bright Green */
+  --color-standby:      #FFC107;  /* Standby / Alert Yellow */
+
+  /* Typography */
+  --font-sans: "Inter", "Rubik", ui-sans-serif, system-ui, sans-serif;
+
+  /* Spacing grid - 8px base */
+  --spacing-1: 8px;
+  --spacing-2: 16px;
+  --spacing-3: 24px;
+  --spacing-4: 32px;
+}
+
+/* ============================================
+   BASE RESET & BODY
+   ============================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #F8F9FA;
+  color: #1A1D20;
+  font-family: "Inter", "Rubik", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   CAMCAST CARD COMPONENT (from DESIGN.md §2A)
+   ============================================ */
+
+.cc-card {
+  background-color: #FFFFFF;
+  border: 2px solid #1A1D20;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 6px 6px 0px #1A1D20;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+/* Hover: shifts 2px down-right, shadow shrinks symmetrically */
+.cc-card:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 4px 4px 0px #1A1D20;
+}
+
+/* Clickable card cursor */
+.cc-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ============================================
+   ACCENT (RED) CARD VARIANT
+   ============================================ */
+
+.cc-card-accent {
+  background-color: #FFFFFF;
+  border: 2px solid #E63946;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 6px 6px 0px #E63946;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.cc-card-accent:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 4px 4px 0px #E63946;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+/* Primary button (Red accent) */
+.cc-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #E63946;
+  color: #FFFFFF;
+  border: 2px solid #E63946;
+  border-radius: 12px;
+  padding: 10px 24px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px #E63946;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease;
+  text-decoration: none;
+}
+
+.cc-btn-primary:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #E63946;
+  background-color: #c62f3b;
+}
+
+/* Outline button (dark border) */
+.cc-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: transparent;
+  color: #1A1D20;
+  border: 2px solid #1A1D20;
+  border-radius: 12px;
+  padding: 10px 24px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px #1A1D20;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s ease;
+  text-decoration: none;
+}
+
+.cc-btn-outline:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #1A1D20;
+  background-color: #1A1D20;
+  color: #F8F9FA;
+}
+
+/* ============================================
+   TYPOGRAPHY UTILITIES
+   ============================================ */
+
+.cc-heading-1 {
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.1;
+  color: #1A1D20;
+  letter-spacing: -0.02em;
+}
+
+.cc-heading-2 {
+  font-weight: 700;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  line-height: 1.2;
+  color: #1A1D20;
+  letter-spacing: -0.01em;
+}
+
+.cc-label-caps {
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #1A1D20;
+}
+
+/* ============================================
+   STATUS BADGE
+   ============================================ */
+
+.cc-badge-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(57, 255, 20, 0.15);
+  border: 2px solid rgba(57, 255, 20, 0.7);
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1A1D20;
+  box-shadow: 2px 2px 0px rgba(57, 255, 20, 0.7);
+}
+
+.cc-badge-standby {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(255, 193, 7, 0.15);
+  border: 2px solid #FFC107;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1A1D20;
+  box-shadow: 2px 2px 0px #FFC107;
+}
+
+/* ============================================
+   NAVBAR
+   ============================================ */
+
+.cc-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: #F8F9FA;
+  border-bottom: 2px solid #1A1D20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 64px;
+}
+
+.cc-logo {
+  font-weight: 800;
+  font-size: 1.375rem;
+  letter-spacing: -0.03em;
+  color: #1A1D20;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cc-logo span.accent {
+  color: #E63946;
+}
