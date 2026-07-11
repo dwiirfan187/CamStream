@@ -10,7 +10,8 @@
     "dev:next": "next dev",
     "build": "next build",
     "start": "node node_modules/tsx/dist/cli.mjs server.ts",
-    "lint": "eslint"
+    "lint": "eslint",
+    "postinstall": "node node_modules/prisma/build/index.js generate"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",
