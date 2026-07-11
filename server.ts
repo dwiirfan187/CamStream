@@ -32,10 +32,12 @@ import next from "next";
 import { Server as SocketIOServer } from "socket.io";
 
 const dev      = process.env.NODE_ENV !== "production";
-const hostname = process.env.HOSTNAME ?? "0.0.0.0";
+const hostname = "0.0.0.0";
 const port     = parseInt(process.env.PORT ?? "3000", 10);
 
-const app    = next({ dev, hostname, port });
+// Next.js app — jangan pass hostname/port ke constructor,
+// biarkan httpServer yang handle binding
+const app    = next({ dev });
 const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
