@@ -31,15 +31,7 @@ export default function OBSStreamClient({ slotId }: OBSStreamClientProps) {
       autoPlay
       playsInline
       muted
-      style={{
-        position: "fixed",
-        inset: 0,
-        width: "100%",
-        height: "100%",
-        objectFit: "cover",
-        background: "transparent",
-        display: "block",
-      }}
+      className="w-screen h-screen object-contain bg-black fixed inset-0"
       aria-label="OBS Browser Source stream"
     />
   );

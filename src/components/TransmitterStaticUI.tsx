@@ -319,8 +319,39 @@ export default function TransmitterStaticUI({ slotId }: TransmitterStaticUIProps
   const handleFlip = useCallback(async () => {
     const next: "front" | "back" = facing === "back" ? "front" : "back";
     setFacing(next);
-    await startCamera(next);
-  }, [facing, startCamera]);
+    
+    try {
+      const currentStream = streamRef.current;
+      if (currentStream) {
+        currentStream.getTracks().forEach(track => track.stop());
+      }
+
+      const newStream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: next === "front" ? "user" : "environment", width: { ideal: 1920 }, height: { ideal: 1080 } },
+        audio: true
+      });
+
+      streamRef.current = newStream;
+      newStream.getAudioTracks().forEach((t) => { t.enabled = !isMuted; });
+
+      if (videoRef.current) {
+        videoRef.current.srcObject = newStream;
+        await videoRef.current.play().catch(() => {});
+      }
+
+      if (pcRef.current) {
+        const senders = pcRef.current.getSenders();
+        newStream.getTracks().forEach((track) => {
+          const sender = senders.find((s) => s.track?.kind === track.kind);
+          if (sender) {
+            sender.replaceTrack(track).catch(err => console.error("Error replacing track:", err));
+          }
+        });
+      }
+    } catch (err) {
+      console.error("Flip camera error:", err);
+    }
+  }, [facing, isMuted]);
 
   /* ── Mute toggle ────────────────────────────────────────────────────── */
   const handleMute = useCallback(() => {
