@@ -13,6 +13,7 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { io, type Socket } from "socket.io-client";
+import TransmitterScanner from "./TransmitterScanner";
 
 const ICE_SERVERS: RTCIceServer[] = [
   { urls: "stun:stun.l.google.com:19302" },
@@ -162,6 +163,37 @@ interface TransmitterStaticUIProps {
 }
 
 export default function TransmitterStaticUI({ slotId }: TransmitterStaticUIProps) {
+  // Kondisi A: Tanpa Slot ID -> Tampilkan QR Code Scanner
+  if (!slotId) {
+    return (
+      <div
+        className="relative w-full h-[100dvh] flex flex-col items-center justify-center overflow-hidden select-none"
+        style={{ background: "#0a0a0a" }}
+      >
+        {/* Top bar */}
+        <div className="w-full flex items-center justify-between px-5 pt-6 pb-4 flex-shrink-0 absolute top-0 left-0 right-0 z-30">
+          <div className="flex flex-col gap-0.5">
+            <span className="text-[9px] font-bold uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.3)" }}>
+              CamCast · Transmitter
+            </span>
+          </div>
+          <div
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full"
+            style={{ background: "rgba(255,193,7,0.12)", border: "1.5px solid rgba(255,193,7,0.4)" }}
+            role="status"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FFC107]" aria-hidden="true" />
+            <span className="text-[9px] font-bold uppercase tracking-widest" style={{ color: "#FFC107" }}>
+              Tanpa Slot
+            </span>
+          </div>
+        </div>
+
+        <TransmitterScanner />
+      </div>
+    );
+  }
+
   const [facing, setFacing]     = useState<"front" | "back">("back");
   const [isMuted, setIsMuted]   = useState(false);
   const [hasStream, setHasStream] = useState(false);

@@ -48,6 +48,8 @@ function LiveVideoArea({ stream }: { stream: MediaStream | null }) {
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.srcObject = stream;
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
     }
   }, [stream]);
 
@@ -60,7 +62,7 @@ function LiveVideoArea({ stream }: { stream: MediaStream | null }) {
         ref={videoRef}
         autoPlay
         playsInline
-        muted
+        muted={true}
         className="absolute inset-0 w-full h-full object-cover rounded-xl"
         aria-label="Stream kamera langsung"
       />
