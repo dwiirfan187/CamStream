@@ -1,8 +1,8 @@
 [build]
 builder = "nixpacks"
-buildCommand = "npm install --include=dev && node node_modules/prisma/build/index.js generate && npm run build"
+buildCommand = "npm install --include=dev && node node_modules/prisma/build/index.js generate && NODE_ENV=production npm run build"
 
 [deploy]
-startCommand = "node node_modules/prisma/build/index.js db push --accept-data-loss && npm run start"
+startCommand = "NODE_ENV=production node node_modules/prisma/build/index.js db push --accept-data-loss && NODE_ENV=production node server.js"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3

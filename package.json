@@ -8,8 +8,8 @@
   "scripts": {
     "dev": "tsx server.ts",
     "dev:next": "next dev",
-    "build": "next build",
-    "start": "node node_modules/tsx/dist/cli.mjs server.ts",
+    "build": "next build && npx tsc --project tsconfig.server.json",
+    "start": "node server.js",
     "lint": "eslint",
     "postinstall": "node node_modules/prisma/build/index.js generate"
   },

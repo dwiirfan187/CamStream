@@ -31,7 +31,16 @@ import { parse } from "node:url";
 import next from "next";
 import { Server as SocketIOServer } from "socket.io";
 
-const dev      = process.env.NODE_ENV !== "production";
+const isProd = process.env.NODE_ENV === "production" || 
+               (process.env.NODE_ENV !== "development" && 
+                (process.env.PORT !== undefined || 
+                 (typeof __filename !== "undefined" && __filename.endsWith(".js"))));
+
+if (isProd) {
+  (process.env as any).NODE_ENV = "production";
+}
+
+const dev      = !isProd;
 const hostname = "0.0.0.0";
 const port     = parseInt(process.env.PORT ?? "3000", 10);
 
