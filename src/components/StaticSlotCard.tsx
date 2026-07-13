@@ -46,58 +46,41 @@ function LiveVideoArea({ stream }: { stream: MediaStream | null }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (videoRef.current && stream) {
+    if (videoRef.current) {
       videoRef.current.srcObject = stream;
     }
   }, [stream]);
 
-  if (stream) {
-    return (
-      /* Same wrapper className as the placeholder — zero layout change */
-      <div
-        className="w-full aspect-video rounded-xl bg-[#1A1D20] flex flex-col items-center justify-center gap-2 relative overflow-hidden"
-        aria-label="Live video feed"
-      >
-        <video
-          ref={videoRef}
-          autoPlay
-          playsInline
-          muted={false}
-          className="absolute inset-0 w-full h-full object-cover rounded-xl"
-          aria-label="Stream kamera langsung"
-        />
-        {/* Live dot overlay — identical style */}
-        <div className="absolute top-3 left-3 flex items-center gap-1.5 z-10">
-          <span className="w-2 h-2 rounded-full bg-[rgba(57,255,20,0.9)] animate-pulse" aria-hidden="true" />
-          <span className="text-[9px] font-bold uppercase tracking-widest" style={{ color: "rgba(57,255,20,0.8)" }}>
-            Live
-          </span>
-        </div>
-      </div>
-    );
-  }
-
-  /* No stream yet — show animated placeholder (identical to static version) */
   return (
     <div
       className="w-full aspect-video rounded-xl bg-[#1A1D20] flex flex-col items-center justify-center gap-2 relative overflow-hidden"
-      aria-label="Menunggu stream..."
+      aria-label="Live video feed"
     >
-      <div
-        className="absolute inset-0 opacity-[0.07]"
-        style={{ backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,1) 3px, rgba(255,255,255,1) 4px)" }}
-        aria-hidden="true"
+      <video
+        ref={videoRef}
+        autoPlay
+        playsInline
+        muted
+        className="absolute inset-0 w-full h-full object-cover rounded-xl"
+        aria-label="Stream kamera langsung"
       />
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <rect x="2" y="6" width="15" height="12" rx="2" stroke="rgba(57,255,20,0.7)" strokeWidth="2" fill="none" />
-        <path d="M17 9.5L22 7V17L17 14.5" stroke="rgba(57,255,20,0.7)" strokeWidth="2" strokeLinejoin="round" fill="none" />
-        <circle cx="9.5" cy="12" r="2.5" fill="rgba(57,255,20,0.7)" />
-      </svg>
-      <span className="cc-label-caps text-[rgba(57,255,20,0.8)] text-[10px] z-10">Menunggu Stream...</span>
-      <div className="absolute top-3 left-3 flex items-center gap-1.5">
+      {/* Live dot overlay — identical style */}
+      <div className="absolute top-3 left-3 flex items-center gap-1.5 z-10">
         <span className="w-2 h-2 rounded-full bg-[rgba(57,255,20,0.9)] animate-pulse" aria-hidden="true" />
-        <span className="text-[9px] font-bold uppercase tracking-widest" style={{ color: "rgba(57,255,20,0.8)" }}>Live</span>
+        <span className="text-[9px] font-bold uppercase tracking-widest" style={{ color: "rgba(57,255,20,0.8)" }}>
+          Live
+        </span>
       </div>
+      {!stream && (
+        <div className="flex flex-col items-center justify-center gap-2 z-10 pointer-events-none">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="2" y="6" width="15" height="12" rx="2" stroke="rgba(57,255,20,0.7)" strokeWidth="2" fill="none" />
+            <path d="M17 9.5L22 7V17L17 14.5" stroke="rgba(57,255,20,0.7)" strokeWidth="2" strokeLinejoin="round" fill="none" />
+            <circle cx="9.5" cy="12" r="2.5" fill="rgba(57,255,20,0.7)" />
+          </svg>
+          <span className="cc-label-caps text-[rgba(57,255,20,0.8)] text-[10px]">Menunggu Stream...</span>
+        </div>
+      )}
     </div>
   );
 }

@@ -6,8 +6,8 @@ export default auth((req: NextRequest & { auth: unknown }) => {
   const { nextUrl } = req;
   const session = (req as { auth?: { user?: unknown } }).auth;
 
-  // Jangan sentuh API auth routes sama sekali
-  if (nextUrl.pathname.startsWith("/api/auth")) {
+  // Jangan sentuh API auth routes dan rute stream OBS/vMix sama sekali
+  if (nextUrl.pathname.startsWith("/api/auth") || nextUrl.pathname.startsWith("/stream")) {
     return NextResponse.next();
   }
 

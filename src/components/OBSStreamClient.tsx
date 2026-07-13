@@ -30,7 +30,7 @@ export default function OBSStreamClient({ slotId }: OBSStreamClientProps) {
       ref={videoRef}
       autoPlay
       playsInline
-      muted={false}
+      muted
       style={{
         position: "fixed",
         inset: 0,
